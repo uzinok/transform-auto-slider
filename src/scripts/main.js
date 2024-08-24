@@ -42,6 +42,9 @@ const prevItem = () => {
 };
 
 const startAutoPlay = () => {
+	nextButton.removeEventListener('mouseleave', startAutoPlay);
+	prevButton.removeEventListener('mouseleave', startAutoPlay);
+
 	isStart = setInterval(() => {
 		if (currentItem < galleryItems.length - 1) {
 			nextItem();
@@ -53,21 +56,22 @@ const startAutoPlay = () => {
 };
 
 const stopAutoPlay = () => {
+
 	clearInterval(isStart);
 };
 
 nextButton.addEventListener('click', () => {
 	stopAutoPlay();
 	nextItem();
+	nextButton.addEventListener('mouseleave', startAutoPlay);
 });
 
 prevButton.addEventListener('click', () => {
 	stopAutoPlay();
 	prevItem();
+	prevButton.addEventListener('mouseleave', startAutoPlay);
 });
 
-nextButton.addEventListener('mouseleave', startAutoPlay);
-prevButton.addEventListener('mouseleave', startAutoPlay);
 
 gallery.addEventListener('mouseenter', stopAutoPlay);
 gallery.addEventListener('mouseleave', startAutoPlay);
@@ -75,3 +79,24 @@ gallery.addEventListener('mouseleave', startAutoPlay);
 startAutoPlay();
 updateNavButtons();
 shiftGallery();
+
+// let resizeTimeout;
+// let resizeInProgress = false;
+
+// // Обработчик события изменения размера окна
+// function onResize() {
+// 	if (!resizeInProgress) {
+// 		stopAutoPlay();
+// 		resizeInProgress = true;
+// 	}
+
+// 	clearTimeout(resizeTimeout);
+
+// 	resizeTimeout = setTimeout(() => {
+// 		startAutoPlay();
+// 		resizeInProgress = false;
+// 	}, 200); // 200 мс - примерное время ожидания после завершения изменения размера
+// }
+
+// // Добавляем обработчик события resize
+// window.addEventListener('resize', onResize);
