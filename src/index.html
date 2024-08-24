@@ -1,11 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
+	<link rel="stylesheet" href="./styles/main.min.css">
 </head>
+
 <body>
-	сборка работает
+	<h1>Галлерея</h1>
+	<ul>
+		<li>автоматическая прокрутка</li>
+		<li>при наведении пауза</li>
+		<li>дизаблить кнопки в крайних положениях</li>
+		<li>до 990 активный слыйд по-центру</li>
+		<li>после клика на кнопки пауза, пока над кнопкой курсор</li>
+	</ul>
+
+	<div class="gallery">
+		<div class="gallery__item show">
+			<img src="img/photo01.jpg">
+		</div>
+		<div class="gallery__item">
+			<img src="img/photo02.jpg">
+		</div>
+		<div class="gallery__item">
+			<img src="img/photo03.jpg">
+		</div>
+		<div class="gallery__item">
+			<img src="img/photo04.jpg">
+		</div>
+		<div class="gallery__item">
+			<img src="img/photo05.jpg">
+		</div>
+		<div class="gallery__item">
+			<img src="img/photo06.jpg">
+		</div>
+		<div class="gallery__item">
+			<img src="img/photo07.jpg">
+		</div>
+		<div class="gallery__item">
+			<img src="img/photo08.jpg">
+		</div>
+	</div>
+
+	<div class="gallery__nav">
+		<div class="gallery__prev">
+			<svg>
+				<use href="#arrowG"></use>
+			</svg>
+		</div>
+		<div class="gallery__next">
+			<svg>
+				<use href="#arrowG"></use>
+			</svg>
+		</div>
+	</div>
+
+	<svg style="display: none">
+		<symbol id="arrowG" viewBox="0 0 22 8">
+			<path stroke-linecap="round" stroke-width="1.5" d="M21.24 4H.76m0 0L4.17.73M.76 4l3.41 3.27"></path>
+		</symbol>
+	</svg>
+
+	<script src="scripts/main.min.js"></script>
 </body>
+
 </html>

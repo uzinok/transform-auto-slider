@@ -1,4 +1,87 @@
-// @import './layout/grid.scss'; // для сетки
+.gallery {
+	display: flex;
+	flex-direction: row;
+	width: 170px;
+	margin: 0 auto;
+	transition: transform 0.5s ease-in-out;
+	gap: 5px;
+}
 
-@import './layout/variable.scss';
-@import './layout/scaffolding.scss';
+.gallery__item {
+	flex-shrink: 0;
+	flex-basis: 16px;
+	overflow: hidden;
+	transform: skewX(-11deg);
+	transition: flex-basis 0.5s ease-in-out;
+
+	&.show {
+		flex-basis: 170px;
+	}
+
+	& img {
+		position: relative;
+		top: 50%;
+		left: 50%;
+		width: 220px;
+		height: auto;
+		transform: translate(-50%, -50%) skewX(11deg);
+	}
+}
+
+
+.gallery__nav {
+	display: flex;
+	justify-content: center;
+	margin-top: 9px;
+	gap: 15px;
+}
+
+.gallery__prev,
+.gallery__next {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 48px;
+	height: 48px;
+	cursor: pointer;
+	transition: opacity .25s ease-in-out;
+
+	& svg {
+		display: block;
+		width: 48px;
+		transition: stroke .25s ease-in-out;
+		stroke: #222629;
+	}
+
+	&.disable {
+		cursor: default;
+		opacity: .5;
+	}
+
+	&:not(.disable):hover svg {
+		stroke: #e63e21;
+	}
+}
+
+.gallery__next svg {
+	transform: scale(-1, 1);
+}
+
+
+@media (min-width: 990px) {
+	.gallery {
+		width: 306px;
+		margin-left: 0;
+		transform: translateX(0) !important;
+	}
+
+	.gallery__item {
+		&.show {
+			flex-basis: 400px;
+		}
+
+		& img {
+			width: 500px;
+		}
+	}
+}
