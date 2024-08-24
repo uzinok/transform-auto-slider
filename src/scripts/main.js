@@ -79,24 +79,3 @@ gallery.addEventListener('mouseleave', startAutoPlay);
 startAutoPlay();
 updateNavButtons();
 shiftGallery();
-
-// let resizeTimeout;
-// let resizeInProgress = false;
-
-// // Обработчик события изменения размера окна
-// function onResize() {
-// 	if (!resizeInProgress) {
-// 		stopAutoPlay();
-// 		resizeInProgress = true;
-// 	}
-
-// 	clearTimeout(resizeTimeout);
-
-// 	resizeTimeout = setTimeout(() => {
-// 		startAutoPlay();
-// 		resizeInProgress = false;
-// 	}, 200); // 200 мс - примерное время ожидания после завершения изменения размера
-// }
-
-// // Добавляем обработчик события resize
-// window.addEventListener('resize', onResize);
