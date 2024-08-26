@@ -4,6 +4,8 @@ const nextButton = document.querySelector('.gallery__next');
 const gallery = document.querySelector('.gallery');
 let currentItem = 0;
 let isStart;
+var isHover = true;
+const widthClose = gallery.querySelector('.gallery__item:not(.show)').clientWidth;
 
 const showItem = index => {
 	galleryItems.forEach((item, idx) => {
@@ -16,8 +18,8 @@ const showItem = index => {
 const shiftGallery = () => {
 	if (window.innerWidth <= 990) {
 		const gap = parseInt(window.getComputedStyle(gallery).gap);
-		const widthClose = gallery.querySelector('.gallery__item:not(.show)').clientWidth;
 		const shift = currentItem === 0 ? 0 : (gap + widthClose) * (currentItem - 1);
+
 		gallery.style.transform = `translateX(-${shift}px)`;
 	}
 }
@@ -56,9 +58,32 @@ const startAutoPlay = () => {
 };
 
 const stopAutoPlay = () => {
-
 	clearInterval(isStart);
 };
+
+const onMousChangeGalery = (evt) => {
+	stopAutoPlay();
+
+	if (!isHover && evt.target.dataset.galeryId !== currentItem) {
+		return;
+	}
+	currentItem = parseInt(evt.target.dataset.galeryId ? evt.target.dataset.galeryId : currentItem);
+
+	showItem(currentItem);
+	updateNavButtons();
+
+	isHover = false;
+	window.setTimeout(() => {
+		isHover = true;
+	}, 500);
+}
+
+galleryItems.forEach((item, idx) => {
+	item.dataset.galeryId = idx;
+
+	item.addEventListener('mouseenter', onMousChangeGalery);
+	item.addEventListener('mouseleave', startAutoPlay);
+});
 
 nextButton.addEventListener('click', () => {
 	stopAutoPlay();
@@ -72,10 +97,10 @@ prevButton.addEventListener('click', () => {
 	prevButton.addEventListener('mouseleave', startAutoPlay);
 });
 
-
-gallery.addEventListener('mouseenter', stopAutoPlay);
-gallery.addEventListener('mouseleave', startAutoPlay);
-
 startAutoPlay();
 updateNavButtons();
 shiftGallery();
+
+window.setInterval(() => {
+	console.log(isHover);
+}, 400)
